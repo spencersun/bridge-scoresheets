@@ -1,0 +1,169 @@
+%!-PS
+
+% Coded by hand in raw PostScript 1994-95, inspired by a similar
+% scoresheet from C&T Bridge Supplies.
+%
+% PDF and alternate version for pairs games available at
+% http://www.ninthbit.com/~zorak/bridge_scoresheets/
+%
+% CC-BY-NC-SA 4.0: http://creativecommons.org/licenses/by-nc-sa/4.0/
+%
+% S. Spencer Sun <zorak@ninthbit.com>
+
+/inch {72 mul} def
+
+/margin 0.25 inch def
+/boardsheight 6.0 inch def
+/boardswidth 8.0 inch margin 2 mul sub def
+/boxheight boardsheight 36 div def
+
+/boardfontsize 12 def
+/titlefontsize 8 def
+/vulfontsize 5 def
+/dealerfontsize 8 def
+
+/boardfont /Helvetica findfont boardfontsize scalefont def
+/titlefont /Helvetica findfont titlefontsize scalefont def
+/vulfont /Helvetica findfont vulfontsize scalefont def
+/dealerfont /Helvetica findfont dealerfontsize scalefont def
+
+/boardbuffer 2 def
+/titlebuffer 2 def
+/vulbuffer 1 def
+/dealerbuffer vulbuffer vulfontsize add def
+
+/vularray
+[
+  (None) (N-S) (E-W) (Both)
+  (N-S) (E-W) (Both) (None)
+  (E-W) (Both) (None) (N-S)
+  (Both) (None) (N-S) (E-W)
+] def
+
+/dealerarray [ (N) (E) (S) (W) ] def
+
+/even
+{
+  2 mod 0 eq
+} bind def
+
+/center
+{
+  dup stringwidth pop 2 div neg 0 rmoveto show
+} bind def
+
+/rshow
+{
+  dup stringwidth pop neg dup 0 rmoveto exch show 0 rmoveto
+} bind def
+
+/str (  ) def
+
+/boardsbox
+{
+  0 setlinewidth
+  newpath
+  0 0 moveto
+  boardswidth 0 lineto stroke
+  gsave
+  1 1 36
+  {
+    0 boxheight neg translate
+    newpath
+    0 0 moveto
+    boardswidth 0 lineto 0 boxheight rlineto
+    boardswidth neg 0 rlineto closepath
+    dup even { gsave 0.95 setgray fill grestore } if
+    0 setlinewidth stroke
+    boardfont setfont
+    dup str cvs dup
+    % # (#) (#) 
+    stringwidth pop
+    % # (#) x
+    15 exch sub 1 sub boardbuffer moveto
+    show
+    % #
+    vulfont setfont
+    dup 1 sub 16 mod vularray exch get
+    22 vulbuffer moveto center
+    % #
+    dealerfont setfont
+    1 sub 4 mod dealerarray exch get
+    22 dealerbuffer moveto center
+  }
+  for
+  /Times-Italic findfont 8 scalefont setfont
+  0 -10 moveto
+  (Original PostScript by S. Spencer Sun <spe...@z-code.com>, inspired by a similar item from C&T Bridge Supplies.  E-mail me for a teams movement score sheet.) show
+  0 -20 moveto
+  (You may reproduce and distribute copies of this score sheet provided you leave this message intact and don't charge any money for it.  [2/21/95]) show
+  grestore
+  newpath
+  0 boardsheight neg moveto
+  boardswidth 0 rlineto
+  0 boardsheight boxheight add rlineto
+  boardswidth neg 0 rlineto
+  0 boardsheight boxheight add neg rlineto
+  /column { boardsheight boxheight add rmoveto 0 boardsheight neg boxheight sub rlineto } bind def
+  15 column
+  15 column
+  15 column % Vs
+  35 column % Contract
+  10 column % Dlr
+  20 column % Lead
+  20 column % Rslt
+  40 column % Plus
+  40 column % Minus
+  20 column % Est.
+  20 column % Pts
+  boardswidth boxheight moveto 0 boardsheight neg boxheight sub rlineto
+  stroke
+  titlefont setfont
+  /title { titlebuffer moveto center } bind def
+  % /vertical { 0 moveto gsave currentpoint translate 90 rotate boxheight 2 div titlebuffer moveto center grestore } bind def
+  (Vs) 37 title
+  (Contract) 62 title
+  (By) 85 title
+  (Lead) 100 title
+  (Rslt) 120 title
+  (Plus) 150 title
+  (Minus) 190 title
+  (Est.) 220 title
+  (Pts) 240 title
+  252 titlebuffer moveto (Notes) show
+  boardswidth 36 sub titlebuffer moveto (MPs:) rshow
+  -2 titlebuffer neg rmoveto 0 boxheight rlineto
+  -36 titlebuffer boxheight sub rmoveto (Pct:) rshow
+  -2 titlebuffer neg rmoveto 0 boxheight rlineto
+  -36 titlebuffer boxheight sub rmoveto (Score:) rshow
+  -2 titlebuffer neg rmoveto 0 boxheight rlineto
+  -27 titlebuffer boxheight sub rmoveto (Place:) rshow
+  -2 titlebuffer neg rmoveto 0 boxheight rlineto
+  0 setlinewidth stroke
+} bind def
+
+gsave
+%90 rotate margin -1.25 inch translate
+margin 10 inch translate
+
+gsave
+boardsbox
+
+grestore
+
+0 boxheight titlebuffer 2 mul add translate
+titlefont setfont
+newpath
+boardswidth 0 moveto
+-54 0 rlineto
+( Pair/Team # ) rshow
+(Partner/Teammates ) dup stringwidth pop 0 lineto rshow 0 setlinewidth stroke
+0 titlebuffer titlefontsize 2 mul add translate
+newpath
+0 0 moveto
+(Date ) show 0.5 inch 0 rlineto
+( Event ) show boardswidth 0 lineto 0 setlinewidth stroke
+
+grestore
+
+showpage
