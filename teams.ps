@@ -1,9 +1,9 @@
 %!-PS
 
-% Coded by hand in raw PostScript 1994-95, inspired by a similar
+% Coded by hand in raw PostScript in 1994, inspired by a similar
 % scoresheet from C&T Bridge Supplies.
 %
-% PDF and alternate version for pairs games available at
+% PDF and alternate version for pair games available at
 % http://www.ninthbit.com/~zorak/bridge_scoresheets/
 %
 % CC-BY-NC-SA 4.0: http://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -51,7 +51,7 @@
   [(28+)   (30-0)]
 ] def
 
-% And this is the label that will be printed for hte second table.
+% And this is the label that will be printed for the second table.
 
 /30VPlabel (30-VP scale) def
 
@@ -81,6 +81,7 @@
   titlefontsize 3 mul sub
   titlebuffer 7 mul sub
   40 div def
+/shadedgray 0.90 def
 
 /impcolumnwidth 1.0 inch 6 sub def
 /impcolumnheight 8 def
@@ -143,18 +144,18 @@
 
       gsave
       boardnum 8 gt
-      { boardnum 2 mod 1 eq {0.95 setgray} {1 setgray} ifelse}
-      { boardnum 2 mod 1 eq {1 setgray} {0.95 setgray} ifelse}
+      { boardnum 2 mod 1 eq {shadedgray setgray} {1 setgray} ifelse}
+      { boardnum 2 mod 1 eq {1 setgray} {shadedgray setgray} ifelse}
       ifelse
       fill
       grestore
 
-      0 setlinewidth stroke
+      1 setlinewidth stroke
       newpath
       dlrvulboxwidth 2 div 0 moveto 0 dlrvulboxheight neg rlineto
       0 dlrvulboxheight neg moveto
       dlrvulboxwidth 2 div dlrvulboxheight rlineto
-      0 setlinewidth stroke
+      1 setlinewidth stroke
 
       0 dlrvulboxheight neg translate
 
@@ -189,8 +190,8 @@
   0 0 moveto
   boxwidth 0 lineto 0 boxheight neg rlineto boxwidth neg 0 rlineto
   closepath
-  gsave even {0.95 setgray fill} if grestore
-  0 setlinewidth 0 setgray stroke
+  gsave even {shadedgray setgray fill} if grestore
+  1 setlinewidth 0 setgray stroke
 } bind def
 
 /matchbox
@@ -203,7 +204,7 @@
   -36 0 rlineto ( Total Score: ) rshow
   -36 0 rlineto ( VPs/Pts: ) rshow
   -24 0 rlineto ( Them: ) rshow
-  -24 0 rlineto ( Us: ) 0 setlinewidth rshow
+  -24 0 rlineto ( Us: ) 1 setlinewidth rshow
   (Match # ) dup stringwidth pop ( vs. ) stringwidth pop add
   24 add 0 lineto
   ( vs. ) rshow
@@ -268,14 +269,14 @@
     impcolumnwidth 0 rlineto 0 impcolumnheight neg rlineto
     impcolumnwidth neg 0 rlineto closepath
     gsave
-      even {0.95 setgray fill} if
+      even {shadedgray setgray fill} if
       0 setgray
       impcolumnwidth 2 sub 1 impcolumnheight sub moveto rshow
       impcolumnwidth 16 sub 1 impcolumnheight sub moveto rshow
     grestore
 
     impcolumnwidth 14 sub 0 moveto 0 impcolumnheight neg rlineto
-    0 setlinewidth stroke
+    1 setlinewidth stroke
     0 impcolumnheight neg translate
   } for
   gsave
@@ -307,7 +308,7 @@
     impcolumnwidth 0 rlineto 0 impcolumnheight neg rlineto
     impcolumnwidth neg 0 rlineto closepath
     gsave
-      dup even {0.95 setgray fill} if
+      dup even {shadedgray setgray fill} if
       0 setgray
       table exch get dup
       1 get
@@ -317,7 +318,7 @@
     grestore
 
     impcolumnwidth 2 div 0 moveto 0 impcolumnheight neg rlineto
-    0 setlinewidth stroke
+    1 setlinewidth stroke
     0 impcolumnheight neg translate
   } for
   gsave
@@ -329,7 +330,7 @@
 
 gsave
 %90 rotate margin -1.25 inch translate
-margin 10 inch translate
+margin 9.75 inch translate
 
 gsave
   boardswidth impcolumnwidth sub titlefontsize 3 mul titlebuffer add
@@ -381,7 +382,7 @@ titlefont setfont
 repeat
 /Times-Italic findfont 8 scalefont setfont
 0 0 moveto
-(Coded by hand in raw PostScript 1994-95, inspired by a similar scoresheet from C&T Bridge Supplies.  PDF and alternate version for team games available) show
+(Coded by hand in raw PostScript in 1994, inspired by a similar scoresheet from C&T Bridge Supplies.  PDF and alternate version for pair games available) show
 0 -10 moveto
 (at http://www.ninthbit.com/~zorak/bridge_scoresheets/  Shared under CC-BY-NC-SA http://creativecommons.org/licenses/by-nc-sa/4.0/) show
 
@@ -395,7 +396,7 @@ boxwidth 0 moveto
 ( MPs ) rshow
 -48 0 rlineto
 ( Place ) rshow
-(Teammates ) dup stringwidth pop 0 lineto rshow 0 setlinewidth stroke
+(Teammates ) dup stringwidth pop 0 lineto rshow 1 setlinewidth stroke
 0 titlebuffer titlefontsize 2 mul add translate
 newpath
 boxwidth 0 moveto
@@ -403,7 +404,7 @@ boxwidth 0 moveto
 currentpoint
 0 0 moveto
 (Date ) show 0.5 inch 0 rlineto
-( Event ) show lineto 0 setlinewidth stroke
+( Event ) show lineto 1 setlinewidth stroke
 
 grestore
 
